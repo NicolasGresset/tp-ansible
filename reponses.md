@@ -21,3 +21,10 @@ PIP_CONSTRAINT=cython_constraint.txt pip install -r requirements.txt
 ```
 
 L'interpréteur python est donc modifié dans l'inventaire Ansible pour utiliser l'interpréteur de l'environnement virtuel.
+
+
+## Import des utilisateurs
+
+Je réutilise le script `script/script.sh` réalisé pour un TP précédent qui permet simplement de convertir le fichier csv d'entrée en fichier LDIF interprétable par LDAP.
+
+
