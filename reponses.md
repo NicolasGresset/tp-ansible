@@ -34,3 +34,23 @@ On met en place la solution populaire Traefik qui permet de faire l'interconnexi
 - un fichier docker compose templatisé dédié
 
 On peut ensuite visiter [localhost:8080](http://localhost:8080) pour accéder au dashboard de contrôle de Traefik.
+
+
+## Application Web
+
+Traefik agit principalement sur la couche 4 du modèle OSI (transport) en ce qu'il reroute des paquets TCP. Sa fonction d'équilibreur de charge le fait également agir sur la couche 7 (couche applicative).
+
+
+Détaillons quelques termes de la terminologie Traefik :
+
+- Ingress : Dans le contexte de Traefik et Kubernetes, une ingress est une ressource qui définit comment le trafic externe doit être routé vers les services internes. Traefik utilise des objets Ingress pour configurer le routage.
+- Middleware : Ce sont des composants intermédiaires qui modifient ou manipulent les requêtes et les réponses HTTP, par exemple pour l'authentification, le redémarrage de connexion, etc.
+- Plugin : Des extensions que l'on peut ajouter à Traefik pour étendre ses fonctionnalités (ex : ajout de sécurité, de monitoring, etc.).
+
+Puis, voici les expressions correspondantes :
+
+- Pour capter mondomaine.com/api/* et mondomaine2.fr/api/*, l'expression serait : `Host(mondomaine.com) || Host(mondomaine2.fr) && PathPrefix(/api/)`.
+- Pour capter tondomaine.com/api/*, l'expression serait : `Host(tondomaine.com) && PathPrefix(/api/)`.
+
+
+Puis, utiliser une passerelle HTTP/HTTPS comme Traefik permet de centraliser la gestion du trafic entrant, d'appliquer des règles de routage et de sécuriser la communication via TLS/SSL. Cela simplifie la configuration de manière significative.
