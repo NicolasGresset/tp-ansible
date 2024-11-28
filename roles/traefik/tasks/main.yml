@@ -1,0 +1,19 @@
+# roles/traefik/tasks/main.yml
+
+- name: Ensure Traefik home directory exists
+  file:
+    path: "{{ traefik_home }}"
+    state: directory
+    mode: '0755'
+
+
+- name: Generate docker-compose.yml for Traeffik
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ traefik_home }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Déployer Traefik avec Docker Compose
+  community.docker.docker_compose:
+    project_src: "{{ traefik_home }}"
+    state: present

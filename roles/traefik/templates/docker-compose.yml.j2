@@ -1,0 +1,17 @@
+# roles/traefik/templates/docker-compose.yml.j2
+version: '3.8'
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:{{ traefik_http_port }}"
+      - "--entrypoints.websecure.address=:443"
+    ports:
+      - "{{ traefik_http_port }}:80"   # Port d'entrée HTTP
+      - "{{ traefik_dashboard_port }}:8080"  # Port de gestion pour le tableau de bord
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    labels:
+      - "traefik.enable=true"

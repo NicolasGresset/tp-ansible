@@ -6,3 +6,9 @@
       vars:
         openldap_home: "/tmp/openldap"
         openldap_admin_password: "admin"
+
+# deploy-traefik.yml
+- hosts: ldap_servers
+  become: yes
+  roles:
+    - traefik

@@ -27,4 +27,10 @@ L'interpréteur python est donc modifié dans l'inventaire Ansible pour utiliser
 
 Je réutilise le script `script/script.sh` réalisé pour un TP précédent qui permet simplement de convertir le fichier csv d'entrée en fichier LDIF interprétable par LDAP.
 
+## Traefik
 
+On met en place la solution populaire Traefik qui permet de faire l'interconnexion entre des requêtes extérieures à une machine et les services qui correspondent à ces requêtes dans la machine. On réutilise les mêmes technologies pour déployer avec Ansible une instance docker de Traefik, en utilisant notamment : 
+- un rôle dédié
+- un fichier docker compose templatisé dédié
+
+On peut ensuite visiter [localhost:8080](http://localhost:8080) pour accéder au dashboard de contrôle de Traefik.
