@@ -9,3 +9,17 @@
 
     - role: traefik
     - role: whoami
+      vars:
+        whoami_home: "/tmp/whoami_group1"
+
+- hosts: group2
+  roles:
+    - role: whoami
+      vars:
+        whoami_home: "/tmp/whoami_group2"
+
+- hosts: group3
+  roles:
+    - role: whoami
+      vars:
+        whoami_home: "/tmp/whoami_group3"
