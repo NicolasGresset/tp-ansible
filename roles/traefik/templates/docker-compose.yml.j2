@@ -6,12 +6,14 @@ services:
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--entrypoints.web.address=:{{ traefik_http_port }}"
-      - "--entrypoints.websecure.address=:443"
     ports:
       - "{{ traefik_http_port }}:80"   # Port d'entrée HTTP
       - "{{ traefik_dashboard_port }}:8080"  # Port de gestion pour le tableau de bord
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
     labels:
-      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"

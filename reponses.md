@@ -38,8 +38,8 @@ On peut ensuite visiter [localhost:8080](http://localhost:8080) pour accéder au
 
 ## Application Web
 
+### Compréhension générale
 Traefik agit principalement sur la couche 4 du modèle OSI (transport) en ce qu'il reroute des paquets TCP. Sa fonction d'équilibreur de charge le fait également agir sur la couche 7 (couche applicative).
-
 
 Détaillons quelques termes de la terminologie Traefik :
 
@@ -54,3 +54,28 @@ Puis, voici les expressions correspondantes :
 
 
 Puis, utiliser une passerelle HTTP/HTTPS comme Traefik permet de centraliser la gestion du trafic entrant, d'appliquer des règles de routage et de sécuriser la communication via TLS/SSL. Cela simplifie la configuration de manière significative.
+
+
+### Fonctionnement technique
+
+Dans le fichier docker-compose, on paramètre le service `whoami` pour répondre au nom de domaine `whoami.localhost`. Traefik va ensuite pouvoir router les requêtes HTTP à destination de ce nom de domaine vers le service correspondant, ici `whoami`.
+
+```bash
+❯ curl -H Host:whoami.docker.localhost http://127.0.0.1:8000
+Hostname: 36f08144fbd9
+IP: 127.0.0.1
+IP: ::1
+IP: 172.26.0.2
+RemoteAddr: 172.26.0.3:38888
+GET / HTTP/1.1
+Host: whoami.docker.localhost
+User-Agent: curl/8.11.0
+Accept: */*
+Accept-Encoding: gzip
+X-Forwarded-For: 172.26.0.1
+X-Forwarded-Host: whoami.docker.localhost
+X-Forwarded-Port: 80
+X-Forwarded-Proto: http
+X-Forwarded-Server: a211a3072154
+X-Real-Ip: 172.26.0.1
+```
