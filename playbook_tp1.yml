@@ -1,5 +1,5 @@
 # playbook.yml
-- hosts: ldap_servers
+- hosts: group1
   become: true
   roles:
     - role: openldap
@@ -7,8 +7,5 @@
         openldap_home: "/tmp/openldap"
         openldap_admin_password: "admin"
 
-# deploy-traefik.yml
-- hosts: ldap_servers
-  become: yes
-  roles:
-    - traefik
+    - role: traefik
+    - role: whoami
