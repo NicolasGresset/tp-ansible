@@ -1,0 +1,15 @@
+# templates/docker-compose.yml.j2
+version: '3.8'
+
+services:
+  openldap:
+    image: "{{ openldap_image }}"
+    container_name: openldap_server
+    privileged: true
+    environment:
+      - LDAP_ADMIN_USERNAME={{ openldap_admin_username }}
+      - LDAP_ADMIN_PASSWORD={{ openldap_admin_password }}
+      - LDAP_ROOT={{ openldap_root }}
+    ports:
+      - "1389:1389"
+      - "1636:1636"

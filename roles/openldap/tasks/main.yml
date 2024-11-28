@@ -1,0 +1,17 @@
+# tasks/main.yml
+- name: Ensure OpenLDAP home directory exists
+  file:
+    path: "{{ openldap_home }}"
+    state: directory
+    mode: '0755'
+
+- name: Generate docker-compose.yml for OpenLDAP
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ openldap_home }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Launch OpenLDAP using docker-compose
+  community.docker.docker_compose:
+    project_src: "{{ openldap_home }}"
+    state: present

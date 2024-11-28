@@ -1,0 +1,6 @@
+# defaults/main.yml
+openldap_home: "/path/to/openldap"  # Remplacez par le chemin souhaité
+openldap_admin_username: "admin"
+openldap_admin_password: "admin"  # Remplacez par le mot de passe souhaité
+openldap_root: "dc=ansible,dc=fr"
+openldap_image: "bitnami/openldap:latest"  # Image docker pour OpenLDAP

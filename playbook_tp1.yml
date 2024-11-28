@@ -1,0 +1,8 @@
+# playbook.yml
+- hosts: ldap_servers
+  become: true
+  roles:
+    - role: openldap
+      vars:
+        openldap_home: "/tmp/openldap"
+        openldap_admin_password: "admin"
