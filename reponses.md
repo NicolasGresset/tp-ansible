@@ -61,7 +61,7 @@ Puis, utiliser une passerelle HTTP/HTTPS comme Traefik permet de centraliser la 
 Dans le fichier docker-compose, on paramètre le service `whoami` pour répondre au nom de domaine `whoami.localhost`. Traefik va ensuite pouvoir router les requêtes HTTP à destination de ce nom de domaine vers le service correspondant, ici `whoami`.
 
 ```bash
-❯ curl -H Host:whoami.docker.localhost http://127.0.0.1:8000
+❯ curl -H Host:whoami.localhost http://127.0.0.1:8000
 Hostname: 36f08144fbd9
 IP: 127.0.0.1
 IP: ::1
@@ -79,3 +79,10 @@ X-Forwarded-Proto: http
 X-Forwarded-Server: a211a3072154
 X-Real-Ip: 172.26.0.1
 ```
+
+Il faut bien faire attention à utiliser un réseau docker commun aux différents services pour permettre à traefik de router correctement les services. C'est notamment le cas lorsque plusieurs fichiers docker compose sont utilisés. 
+
+## Utilisation des groupes
+
+On utilise des groupes pour exécuter plusieurs instances de whoami. On va spécifier une instance de groupe comme paramètre ansible directement dans l'invocation du play dans le playbook afin de différencier chacun des groupes.
+

@@ -1,0 +1,10 @@
+# playbook.yml
+- hosts: group1
+  become: true
+  roles:
+    - role: openldap
+      vars:
+        openldap_home: "/tmp/openldap"
+        openldap_admin_password: "admin"
+
+    - role: traefik

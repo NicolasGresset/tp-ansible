@@ -1,17 +1,17 @@
 
 - name: Ensure whoami home directory exists
   file:
-    path: "{{ whoami_home }}"
+    path: "{{ whoami_home }}{{ group_id }}"
     state: directory
     mode: '0755'
 
 - name: Generate docker-compose.yml for whoami
   template:
     src: docker-compose.yml.j2
-    dest: "{{ whoami_home }}/docker-compose.yml"
+    dest: "{{ whoami_home }}{{ group_id }}/docker-compose.yml"
     mode: '0644'
 
 - name: Déployer whoami avec Docker Compose
   community.docker.docker_compose:
-    project_src: "{{ whoami_home }}"
+    project_src: "{{ whoami_home }}{{ group_id }}"
     state: present

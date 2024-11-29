@@ -1,0 +1,20 @@
+# playbook.yml
+- hosts: group1
+  become: true
+  roles:
+    - role: traefik
+    - role: whoami
+      vars:
+        group_id: 1
+
+- hosts: group2
+  roles:
+    - role: whoami
+      vars:
+        group_id: 2
+
+- hosts: group3
+  roles:
+    - role: whoami
+      vars:
+        group_id: 3

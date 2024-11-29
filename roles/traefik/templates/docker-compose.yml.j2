@@ -10,3 +10,8 @@ services:
       - "{{ traefik_dashboard_port }}:8080"  # Port de gestion pour le tableau de bord
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+
+networks:
+  default:
+    external:
+      name: traefik_proxy
